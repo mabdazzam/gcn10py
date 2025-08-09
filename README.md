@@ -190,7 +190,7 @@ gcn10py/
 measured on:
 
 ```
-OS: Slackware 15.0 (post 15.0 -current), x86_64
+OS: Slackware 15.0+, x86_64
 Kernel: 6.12.39
 CPU: Intel(R) Core(TM) Ultra 7 165U
 CPU(s): 14
