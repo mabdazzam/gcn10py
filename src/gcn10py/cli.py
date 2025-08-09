@@ -5,46 +5,50 @@ import platform
 from pathlib import Path
 
 def get_executable_path():
-    """Return the path to the gcn10 executable, bundled with the package."""
+    """return the path to the gcn10 executable, bundled with the package."""
+    # get package directory
     package_dir = Path(__file__).parent
 
     # use platform-appropriate executable
     exe_name = "gcn10.exe" if platform.system() == "Windows" else "gcn10"
     exe_path = package_dir / exe_name
+    # check if executable exists
     if not exe_path.is_file():
         raise FileNotFoundError(f"gcn10 executable not found at {exe_path}")
 
-    # ensure executable permissions on Unix systems
+    # ensure executable permissions on unix systems
     if platform.system() != "Windows":
         os.chmod(exe_path, 0o755)
     return str(exe_path)
 
-def run(args=None):
+def run_gcn10(args=None):
     """
-    Run the gcn10 executable with the provided arguments.
+    run the gcn10 executable with the provided arguments.
     
-    Args:
-        args (list): List of command-line arguments
+    args:
+        args (list): list of command-line arguments
         (e.g., ['-c', 'config.txt', '-l', 'block_ids.txt', '-o', 'overwrite']).
-                     If None, uses sys.argv[1:].
+                     if none, uses sys.argv[1:].
     
-    Returns:
-        subprocess.CompletedProcess: Result of the gcn10 execution.
+    returns:
+        subprocess.completedprocess: result of the gcn10 execution.
     
-    Raises:
-        subprocess.CalledProcessError: If gcn10 returns a non-zero exit code.
-        FileNotFoundError: If the gcn10 executable is not found.
+    raises:
+        subprocess.calledprocesserror: if gcn10 returns a non-zero exit code.
+        filenotfounderror: if the gcn10 executable is not found.
     """
+    # use sys.argv if no args provided
     if args is None:
         args = sys.argv[1:]
-    
+
     try:
+        # get path to gcn10 executable
         exe_path = get_executable_path()
 
         # construct command with executable path and args
         cmd = [exe_path] + args
 
-        # run gcn10, cpature std. out and err 
+        # run gcn10, capture std. out and err
         result = subprocess.run(
             cmd,
             capture_output=True,
@@ -55,17 +59,23 @@ def run(args=None):
         # print stdout
         if result.stdout:
             print(result.stdout, end="")
+
+        # print stderr
         if result.stderr:
             print(result.stderr, end="", file=sys.stderr)
         return result
     except subprocess.CalledProcessError as e:
-
+        
         # print err and re-raise
-        print(f"Error running gcn10: {e.stderr}", file=sys.stderr)
+        print(f"error running gcn10: {e.stderr}", file=sys.stderr)
         raise
     except FileNotFoundError as e:
-        print(f"Error: {e}", file=sys.stderr)
+
+        # print err and re-raise
+        print(f"error: {e}", file=sys.stderr)
         raise
 
 if __name__ == "__main__":
-    run()
+
+    # run the main function
+    run_gcn10()
