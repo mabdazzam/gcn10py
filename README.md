@@ -1,6 +1,5 @@
-[![PyPI version](https://badge.fury.io/py/gcn10py.svg)](https://pypi.org/project/gcn10py/)
-
 # 1. GCN10Py
+[![PyPI version](https://badge.fury.io/py/gcn10py.svg)](https://pypi.org/project/gcn10py/)
 
 **GCN10py** is a Python interface to the high-performance C-based [`gcn10`](https://github.com/mabdazzam/gcn10/tree/main/src/c/mpi)
 executable for generating high-resolution (10m) Global Curve Number (GCN) rasters using MPI. 
