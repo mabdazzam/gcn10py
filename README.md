@@ -1,3 +1,5 @@
+G[![PyPI version](https://badge.fury.io/py/gcn10py.svg)](https://pypi.org/project/gcn10py/)
+
 # GCN10Py
 
 **GCN10py** is a Python interface to the high-performance C-based [`gcn10`](https://github.com/mabdazzam/gcn10/tree/main/src/c/mpi)
@@ -176,10 +178,6 @@ gcn10py/
 ## Testing & Benchmarks
 
 ### testing
-- unit tests (if provided) under `tests/`:
-  ```bash
-  pytest -q
-  ```
 - functional check:
   - edit `testing/config.yaml` to point to your AOI and inputs
   - run `testing/gcn10_driver.py -y testing/config.yaml`
@@ -197,9 +195,9 @@ CPU(s): 14
 Memory: 64 GiB
 ```
 
-- `gcn10` C binary: 4 blocks, 4 MPI processes → **4 min 15 s**
-- `gcn10py` CLI (python wrapper only): same 4 blocks → **5 min 40 s**
-- YAML driver (same 4 blocks) + build VRTs + 18 mosaics clipped to AOI → **6 min 34 s**  
+- `gcn10` C binary: 4 blocks, 4 MPI processes:  **4 min 15 s**
+- `gcn10py` CLI (python wrapper only): same 4 blocks: **5 min 40 s**
+- YAML driver (same 4 blocks) + build VRTs + 18 mosaics clipped to AOI: **6 min 34 s**  
   (GDAL threads: `GDAL_NUM_THREADS=ALL_CPUS`, creation options: `TILED=YES, COMPRESS=LZW, BIGTIFF=YES`)
 
 performance will vary with I/O bandwidth, MPI binding, GDAL config, OS and most importantly internet connection.

@@ -2,9 +2,9 @@
 # package name
 name = "gcn10py"
 # package version
-version = "0.1.0"
+version = "0.1.1"
 # package description
-description = "python interface to the gcn10 executable for curve number generation"
+description = "Python interface to the high-performance, MPI-Parallelized C executable `gcn10` for generating high-resolution Global Curve Number 10m rasters"
 # readme file
 readme = "README.md"
 # python version requirement
