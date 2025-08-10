@@ -174,8 +174,6 @@ gcn10py/
     
 ```
 
----
-
 ## 5.2. Testing & Benchmarks
 
 - functional check:
@@ -201,8 +199,6 @@ Memory: 64 GiB
 performance will vary with I/O bandwidth, MPI binding, GDAL config, OS and most importantly internet connection.
 For best performance, use linux native utilities.
 
----
-
 ## 5.3. License
 
 Copyright (C) 2025  
@@ -210,8 +206,6 @@ Copyright (C) 2025
 
 Released under the [GNU General Public License v3.0](https://www.gnu.org/licenses/gpl-3.0.html).  
 See the `LICENSE` file for full terms.
-
----
 
 ## 5.4. Contact
 
