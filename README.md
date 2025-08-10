@@ -1,14 +1,16 @@
-G[![PyPI version](https://badge.fury.io/py/gcn10py.svg)](https://pypi.org/project/gcn10py/)
+[![PyPI version](https://badge.fury.io/py/gcn10py.svg)](https://pypi.org/project/gcn10py/)
 
-# GCN10Py
+# 1. GCN10Py
 
 **GCN10py** is a Python interface to the high-performance C-based [`gcn10`](https://github.com/mabdazzam/gcn10/tree/main/src/c/mpi)
-executable for generating Curve Number (CN) rasters using MPI. It enables
-block-based, parallel generation of CN maps from global soil and land cover datasets.
+executable for generating high-resolution (10m) Global Curve Number (GCN) rasters using MPI. 
+It enables block-based, parallel generation of CN maps from global soil and land cover datasets.
 
 ---
 
-## Prerequisites
+# 2. Installation
+
+## 2.1.Prerequisites
 
 Ensure the following dependencies are installed and available in your system `PATH`:
 
@@ -16,9 +18,7 @@ Ensure the following dependencies are installed and available in your system `PA
 - MPI implementation (e.g., MPICH, OpenMPI)
 - GDAL runtime libraries (CLI + C bindings)
 
----
-
-## Installation
+## 2.2. pip
 
 Install via pip:
 
@@ -28,16 +28,13 @@ pip install gcn10py
 
 > **Note**: This package requires a working build of the `gcn10` executable, compiled with MPI and GDAL support.
 
----
 
-## Building from Source
+## 2.3. Building from Source
 
-1. Compile the C binary and place it into:
-
+1. Compile the C binary (following the instructions [here](https://github.com/mabdazzam/gcn10/tree/main/src/c/)) and add it to your PATH.
    ```
    src/gcn10py/gcn10      # or gcn10.exe on Windows
    ```
-Follow the instructions [here](https://github.com/mabdazzam/gcn10/tree/main/src/c/)
 
 2. Install the build tools:
 
@@ -54,14 +51,14 @@ Follow the instructions [here](https://github.com/mabdazzam/gcn10/tree/main/src/
 4. Install locally for testing:
 
    ```bash
-   pip install dist/gcn10py-0.1.0-py3-none-any.whl
+   pip install dist/gcn10py-0.1.1-py3-none-any.whl
    ```
 
 ---
 
-## Usage
+## 3. Usage
 
-### command-line (required `-c`, optional `-l` and `-o`)
+### 3.1. command-line (required `-c`, optional `-l` and `-o`)
 
 - `-c <path>`: required. path to the `config.txt` used by the C backend.
 - `-l <path>`: optional. text file containing block ids (one per line).
@@ -99,9 +96,8 @@ mpirun -n 10 gcn10py -c config.txt -l blocks.txt -o
 mpirun -n 10 ./gcn10 -c config.txt -l blocks.txt -o
 ```
 
----
 
-### python api
+### 3.2. Python API
 
 ```python
 from gcn10py import run
@@ -123,13 +119,17 @@ you can wrap this in your own scripts, add logging, or integrate with job schedu
 
 ---
 
-### Generate all 18 rasters for an aoi (yaml-driven execution)
+# 4. Application
 
-a ready-to-use driver and example config live in the **`testing/`** directory:
+The CN rasters are usually required and analysed on a watershed scale. 
+
+A ready-to-use driver and example config live in the **`testing/`** directory:
 
 - `testing/gcn10_driver.py` — orchestrates the full pipeline (discover blocks for your aoi, launch mpi, mosaic, clip)
 - `testing/config.yaml` — example configuration (aoi, blocks, mpi settings, mosaic patterns, gdal options)
 - test data under `testing/` for quick validation
+
+## 4.1  Run for a Vector Area of Interest (yaml-driven execution)
 
 run it like this:
 
@@ -156,7 +156,9 @@ notes:
 
 ---
 
-## Project Structure
+# 5. About the Package
+
+## 5.1 Project Structure
 
 ```text
 gcn10py/
@@ -175,15 +177,12 @@ gcn10py/
 
 ---
 
-## Testing & Benchmarks
+## 5.2. Testing & Benchmarks
 
-### testing
 - functional check:
   - edit `testing/config.yaml` to point to your AOI and inputs
   - run `testing/gcn10_driver.py -y testing/config.yaml`
   - verify 18 outputs appear in `io.output_dir`
-
-### benchmarks (reference)
 
 measured on:
 
@@ -205,7 +204,7 @@ For best performance, use linux native utilities.
 
 ---
 
-## License
+## 5.3. License
 
 Copyright (C) 2025  
 **Abdullah Azzam** ([mabdazzam](https://github.com/mabdazzam))
@@ -215,6 +214,6 @@ See the `LICENSE` file for full terms.
 
 ---
 
-## Contact
+## 5.4. Contact
 
 Questions, bug reports, or contributions? Open an issue or pull request on [GitHub](https://github.com/mabdazzam/gcn10py).
